@@ -28,6 +28,11 @@ namespace DevtoCloneV2.Infrastructure.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
         public void CreateUser(User user)
         {
             _context.Users.Add(user);

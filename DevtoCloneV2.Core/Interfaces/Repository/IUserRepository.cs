@@ -11,6 +11,7 @@ namespace DevtoCloneV2.Core.Interfaces.Repository
     {
         public Task<IEnumerable<User>> GetAllUsers();
         public Task<User?> GetUserById(object id);
+        public Task<User?> GetUserByEmail(string email);
         public void CreateUser(User user);
         public void CreateUsers(IEnumerable<User> users);
         public void UpdateUser(User user);
