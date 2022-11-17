@@ -5,6 +5,12 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevtoCloneV2.Api", "DevtoCloneV2.Api\DevtoCloneV2.Api.csproj", "{7C193E66-ED17-4C13-B1F7-5AE1D22B2383}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D75772D8-4CEF-4D0F-B6E8-03F6D55B5C99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevtoCloneV2.Core", "DevtoCloneV2.Core\DevtoCloneV2.Core.csproj", "{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevtoCloneV2.Infrastructure", "DevtoCloneV2.Infrastructure\DevtoCloneV2.Infrastructure.csproj", "{A1BF50CB-54A0-4E58-8071-C6436C425C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,22 @@ Global
 		{7C193E66-ED17-4C13-B1F7-5AE1D22B2383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C193E66-ED17-4C13-B1F7-5AE1D22B2383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C193E66-ED17-4C13-B1F7-5AE1D22B2383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1BF50CB-54A0-4E58-8071-C6436C425C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1BF50CB-54A0-4E58-8071-C6436C425C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1BF50CB-54A0-4E58-8071-C6436C425C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1BF50CB-54A0-4E58-8071-C6436C425C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C193E66-ED17-4C13-B1F7-5AE1D22B2383} = {D75772D8-4CEF-4D0F-B6E8-03F6D55B5C99}
+		{4BD8BB4B-DBEB-42C2-875D-1A8CC9896BEA} = {D75772D8-4CEF-4D0F-B6E8-03F6D55B5C99}
+		{A1BF50CB-54A0-4E58-8071-C6436C425C4A} = {D75772D8-4CEF-4D0F-B6E8-03F6D55B5C99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AAB0981E-E5B9-4C16-BD89-9509D8F87C8D}
