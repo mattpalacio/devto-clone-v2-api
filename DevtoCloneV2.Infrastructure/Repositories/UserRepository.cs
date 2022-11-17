@@ -52,5 +52,10 @@ namespace DevtoCloneV2.Infrastructure.Repositories
             }
             _context.Users.Remove(user);
         }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

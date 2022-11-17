@@ -15,5 +15,6 @@ namespace DevtoCloneV2.Core.Interfaces.Repository
         public void CreateUsers(IEnumerable<User> users);
         public void UpdateUser(User user);
         public void DeleteUser(User user);
+        public Task SaveAsync();
     }
 }
