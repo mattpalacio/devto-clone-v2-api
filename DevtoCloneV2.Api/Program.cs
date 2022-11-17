@@ -1,4 +1,9 @@
+using DevtoCloneV2.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Database Context
+builder.Services.AddDataAccessServices(builder.Configuration.GetConnectionString("LocalDb"));
 
 // Add services to the container.
 

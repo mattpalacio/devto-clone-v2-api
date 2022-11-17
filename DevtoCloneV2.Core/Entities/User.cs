@@ -10,7 +10,7 @@ namespace DevtoCloneV2.Core.Entities
     public class User : BaseEntity
     {
         [MaxLength(100, ErrorMessage = "Length must be less than 100 characters.")]
-        public string UserName { get; set; } = null!;
+        public string Username { get; set; } = null!;
 
         [EmailAddress(ErrorMessage = "Must be a valid email format.")]
         public string Email { get; set; } = null!;

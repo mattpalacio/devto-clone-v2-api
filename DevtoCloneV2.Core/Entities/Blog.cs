@@ -18,7 +18,7 @@ namespace DevtoCloneV2.Core.Entities
         public string Content { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public virtual User User { get; set; } = null!;
     }
 }
