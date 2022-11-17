@@ -13,4 +13,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DevtoCloneV2.Core\DevtoCloneV2.Core.csproj" />
+    <ProjectReference Include="..\DevtoCloneV2.Infrastructure\DevtoCloneV2.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

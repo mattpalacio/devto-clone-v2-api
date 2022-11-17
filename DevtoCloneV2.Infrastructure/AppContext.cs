@@ -18,14 +18,14 @@ namespace DevtoCloneV2.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Map Overrides
+            MapOverrides(modelBuilder);
+
             // Seed User table
             SeedUsers(modelBuilder);
 
             // Seed Blog table
             SeedBlogPosts(modelBuilder);
-
-            // Map Overrides
-            MapOverrides(modelBuilder);
         }
 
         private static void SeedUsers(ModelBuilder modelBuilder)
@@ -34,16 +34,19 @@ namespace DevtoCloneV2.Infrastructure
                 .HasData(
                     new User
                     {
+                        Id = 1,
                         Username = "matt",
                         Email = "matt@email.com"
                     },
                     new User
                     {
+                        Id = 2,
                         Username = "patrick",
                         Email = "patrick@email.com"
                     },
                     new User
                     {
+                        Id = 3,
                         Username = "anne",
                         Email = "anne@email.com"
                     }
@@ -56,18 +59,21 @@ namespace DevtoCloneV2.Infrastructure
                 .HasData(
                     new Blog
                     {
+                        Id = 1,
                         Title = "Blog Post #1",
                         Content = "This is the first blog post.",
                         UserId = 1
                     },
                     new Blog
                     {
+                        Id = 2,
                         Title = "Blog Post #2",
                         Content = "This is the second blog post.",
                         UserId = 1
                     },
                     new Blog
                     {
+                        Id = 3,
                         Title = "Blog Post #3",
                         Content = "This is the third blog post.",
                         UserId = 2
