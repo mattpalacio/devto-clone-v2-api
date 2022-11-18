@@ -23,6 +23,7 @@ namespace DevtoCloneV2.Infrastructure.Extensions
 
             //Add repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
         }
     }
 }
