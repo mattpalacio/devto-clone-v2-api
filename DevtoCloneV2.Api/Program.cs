@@ -1,4 +1,5 @@
 using DevtoCloneV2.Api.Extensions;
+using DevtoCloneV2.Api.Middleware;
 using DevtoCloneV2.Core.Extensions;
 using DevtoCloneV2.Infrastructure.Extensions;
 using System.Text.Json;
@@ -6,11 +7,12 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add data access services
+// Add services to the container.
 builder.Services.AddDataAccessServices(builder.Configuration.GetConnectionString("LocalDb"));
 builder.Services.AddCoreServices();
 
-// Add services to the container.
+// Add middlewares
+builder.Services.AddMiddlewares();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -35,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 
