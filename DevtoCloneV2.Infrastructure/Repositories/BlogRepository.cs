@@ -15,7 +15,7 @@ namespace DevtoCloneV2.Infrastructure.Repositories
 
         public BlogRepository(AppContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<IEnumerable<Blog>> GetAllBlogPosts()
