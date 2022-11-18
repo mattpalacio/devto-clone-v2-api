@@ -1,4 +1,5 @@
 ﻿using DevtoCloneV2.Core.Entities;
+using DevtoCloneV2.Core.Exceptions;
 using DevtoCloneV2.Core.Interfaces.Repository;
 using DevtoCloneV2.Core.Interfaces.Service;
 using System;
@@ -35,7 +36,8 @@ namespace DevtoCloneV2.Core.Services
         {
             try
             {
-                var blogPost = await _blogRepository.GetBlogPostById(id) ?? throw new Exception();
+                var blogPost = await _blogRepository.GetBlogPostById(id)
+                    ?? throw new NotFoundCoreException($"Blog post with id {id} not found.");
                 return blogPost;
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using DevtoCloneV2.Core.Entities;
+using DevtoCloneV2.Core.Exceptions;
 using DevtoCloneV2.Core.Interfaces.Repository;
 using DevtoCloneV2.Core.Interfaces.Service;
 using System;
@@ -35,7 +36,8 @@ namespace DevtoCloneV2.Core.Services
         {
             try
             {
-                var user = (await _userRepository.GetUserById(id)) ?? throw new Exception();
+                var user = (await _userRepository.GetUserById(id)) 
+                    ?? throw new NotFoundCoreException($"User with id {id} not found.");
                 return user;
             }
             catch (Exception ex)
@@ -48,7 +50,8 @@ namespace DevtoCloneV2.Core.Services
         {
             try
             {
-                var user = (await _userRepository.GetUserByEmail(email)) ?? throw new Exception();
+                var user = (await _userRepository.GetUserByEmail(email))
+                    ?? throw new NotFoundCoreException($"User with email {email} not found.");
                 return user;
             }
             catch (Exception ex)
