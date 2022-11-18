@@ -9,6 +9,7 @@ namespace DevtoCloneV2.Api.Mapper
         public UserProfile()
         {
             CreateMap<User, UserResponseDto>();
+            CreateMap<User, UserWithBlogPostsResponseDto>();
             CreateMap<CreateUserRequestDto, User>();
             CreateMap<UpdateUserRequestDto, User>();
         }

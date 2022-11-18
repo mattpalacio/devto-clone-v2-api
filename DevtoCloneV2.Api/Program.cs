@@ -1,6 +1,7 @@
 using DevtoCloneV2.Api.Extensions;
 using DevtoCloneV2.Core.Extensions;
 using DevtoCloneV2.Infrastructure.Extensions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);

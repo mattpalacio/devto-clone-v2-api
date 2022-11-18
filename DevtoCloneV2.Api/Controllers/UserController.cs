@@ -23,7 +23,7 @@ namespace DevtoCloneV2.Api.Controllers
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userService.GetAllUsers();
-            var usersDto = _mapper.Map<IEnumerable<User>>(users);
+            var usersDto = _mapper.Map<IEnumerable<UserResponseDto>>(users);
             return Ok(usersDto);
         }
 
@@ -31,7 +31,7 @@ namespace DevtoCloneV2.Api.Controllers
         public async Task<IActionResult> GetUserByEmail(string email)
         {
             var user = await _userService.GetUserByEmail(email);
-            var userDto = _mapper.Map<User>(user);
+            var userDto = _mapper.Map<UserWithBlogPostsResponseDto>(user);
             return Ok(userDto);
         }
 

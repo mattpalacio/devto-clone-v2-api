@@ -19,8 +19,4 @@
     <ProjectReference Include="..\DevtoCloneV2.Infrastructure\DevtoCloneV2.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\Blog\" />
-  </ItemGroup>
-
 </Project>
