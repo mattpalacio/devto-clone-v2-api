@@ -1,10 +1,12 @@
 using DevtoCloneV2.Api.Extensions;
+using DevtoCloneV2.Core.Extensions;
 using DevtoCloneV2.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add data access services
 builder.Services.AddDataAccessServices(builder.Configuration.GetConnectionString("LocalDb"));
+builder.Services.AddCoreServices();
 
 // Add services to the container.
 
