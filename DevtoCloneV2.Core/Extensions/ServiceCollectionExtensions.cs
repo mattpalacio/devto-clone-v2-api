@@ -14,6 +14,7 @@ namespace DevtoCloneV2.Core.Extensions
         public static void AddCoreServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBlogService, BlogService>();
         }
     }
 }

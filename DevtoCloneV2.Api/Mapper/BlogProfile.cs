@@ -11,6 +11,9 @@ namespace DevtoCloneV2.Api.Mapper
             CreateMap<Blog, BlogResponseDto>()
                 .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.User.Username))
                 .ForMember(dest => dest.User, opts => opts.Ignore());
+            CreateMap<CreateBlogRequestDto, Blog>()
+                .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.AuthorId));
+            CreateMap<UpdateBlogRequestDto, Blog>();
         }
     }
 }
