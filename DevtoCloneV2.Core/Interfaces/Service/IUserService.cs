@@ -10,7 +10,7 @@ namespace DevtoCloneV2.Core.Interfaces.Service
     public interface IUserService
     {
         public Task<IEnumerable<User>> GetAllUsers();
-        public Task<User> GetUserByEmail(int email);
+        public Task<User> GetUserById(int id);
         public Task<User> GetUserByEmail(string email);
         public Task CreateUser(User user);
         public Task UpdateUser(int id, User user);
