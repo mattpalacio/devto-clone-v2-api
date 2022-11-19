@@ -36,8 +36,13 @@ namespace DevtoCloneV2.Core.Services
         {
             try
             {
-                var blogPost = await _blogRepository.GetBlogPostById(id)
-                    ?? throw new NotFoundCoreException($"Blog post with id {id} not found.");
+                var blogPost = await _blogRepository.GetBlogPostById(id);
+
+                if(blogPost is null)
+                {
+                    throw new NotFoundCoreException($"Blog post with id {id} not found.");
+                }
+
                 return blogPost;
             }
             catch (Exception ex)

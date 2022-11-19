@@ -21,89 +21,42 @@ namespace DevtoCloneV2.Core.Services
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            try
-            {
-                var users = await _userRepository.GetAllUsers();
-                return users;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _userRepository.GetAllUsers();
         }
 
         public async Task<User> GetUserById(int id)
         {
-            try
-            {
-                var user = (await _userRepository.GetUserById(id)) 
-                    ?? throw new NotFoundCoreException($"User with id {id} not found.");
-                return user;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _userRepository.GetUserById(id)
+                ?? throw new NotFoundCoreException($"User with id {id} not found.");
         }
 
         public async Task<User> GetUserByEmail(string email)
         {
-            try
-            {
-                var user = (await _userRepository.GetUserByEmail(email))
-                    ?? throw new NotFoundCoreException($"User with email {email} not found.");
-                return user;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _userRepository.GetUserByEmail(email)
+                ?? throw new NotFoundCoreException($"User with email {email} not found.");
         }
 
         public async Task CreateUser(User user)
         {
-            try
-            {
-                _userRepository.CreateUser(user);
-                await _userRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            _userRepository.CreateUser(user);
+            await _userRepository.SaveAsync();
         }
 
         public async Task UpdateUser(int id, User user)
         {
-            try
-            {
-                var existingUser = await GetUserById(id);
+            var existingUser = await GetUserById(id);
+            existingUser.Username = user.Username;
+            existingUser.Email = user.Email;
 
-                existingUser.Username = user.Username;
-                existingUser.Email = user.Email;
-
-                _userRepository.UpdateUser(existingUser);
-                await _userRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            _userRepository.UpdateUser(existingUser);
+            await _userRepository.SaveAsync();
         }
 
         public async Task DeleteUser(int id)
         {
-            try
-            {
-                var existingUser = await GetUserById(id);
-
-                _userRepository.DeleteUser(existingUser);
-                await _userRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var existingUser = await GetUserById(id);
+            _userRepository.DeleteUser(existingUser);
+            await _userRepository.SaveAsync();
         }
     }
 }
