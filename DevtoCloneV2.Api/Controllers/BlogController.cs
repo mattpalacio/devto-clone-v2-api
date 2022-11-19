@@ -20,7 +20,7 @@ namespace DevtoCloneV2.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBlogPosts()
+        public async Task<ActionResult<IEnumerable<BlogResponseDto>>> GetAllBlogPosts()
         {
             var blogPosts = await _blogService.GetAllBlogPosts();
             var blogPostsDto = _mapper.Map<IEnumerable<BlogResponseDto>>(blogPosts);
@@ -28,7 +28,7 @@ namespace DevtoCloneV2.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBlogPostById(int id)
+        public async Task<ActionResult<BlogResponseDto>> GetBlogPostById(int id)
         {
             var blogPost = await _blogService.GetBlogPostById(id);
             var blogPostDto = _mapper.Map<BlogResponseDto>(blogPost);
@@ -36,11 +36,12 @@ namespace DevtoCloneV2.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogRequestDto newBlogPostDto)
+        public async Task<ActionResult<BlogResponseDto>> CreateBlogPost([FromBody] CreateBlogRequestDto newBlogPostDto)
         {
             var newBlogPost = _mapper.Map<Blog>(newBlogPostDto);
             await _blogService.CreateBlogPost(newBlogPost);
-            return NoContent();
+            var createdBlogPostDto = _mapper.Map<BlogResponseDto>(newBlogPost);
+            return CreatedAtAction(nameof(GetBlogPostById), new { id = createdBlogPostDto.Id }, createdBlogPostDto);
         }
 
         [HttpPut("{id}")]

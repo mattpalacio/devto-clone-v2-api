@@ -20,15 +20,15 @@ namespace DevtoCloneV2.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetAllUsers()
         {
             var users = await _userService.GetAllUsers();
             var usersDto = _mapper.Map<IEnumerable<UserResponseDto>>(users);
             return Ok(usersDto);
         }
 
-        [HttpGet("email")]
-        public async Task<IActionResult> GetUserByEmail(string email)
+        [HttpGet("{email}")]
+        public async Task<ActionResult<UserWithBlogPostsResponseDto>> GetUserByEmail(string email)
         {
             var user = await _userService.GetUserByEmail(email);
             var userDto = _mapper.Map<UserWithBlogPostsResponseDto>(user);
@@ -36,11 +36,12 @@ namespace DevtoCloneV2.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDto newUserDto)
+        public async Task<ActionResult<UserResponseDto>> CreateUser([FromBody] CreateUserRequestDto newUserDto)
         {
             var newUser = _mapper.Map<User>(newUserDto);
             await _userService.CreateUser(newUser);
-            return NoContent();
+            var createdUserDto = _mapper.Map<UserResponseDto>(newUser);
+            return CreatedAtAction(nameof(GetUserByEmail), new { email = createdUserDto.Email }, createdUserDto);
         }
 
         [HttpPut("{id}")]
