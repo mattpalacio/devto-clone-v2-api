@@ -36,7 +36,15 @@ namespace DevtoCloneV2.Api.Middleware
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(result);
             }
-            catch (Exception ex)
+            catch (UnprocessableEntityCoreException ex)
+            {
+                var result = JsonSerializer.Serialize(new { error = ex.Message });
+
+                context.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(result);
+            }
+            catch (Exception)
             {
                 var result = JsonSerializer.Serialize(new { error = "Internal server error." });
 
