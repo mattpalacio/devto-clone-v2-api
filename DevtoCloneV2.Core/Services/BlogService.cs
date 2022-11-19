@@ -14,87 +14,40 @@ namespace DevtoCloneV2.Core.Services
     {
         private readonly IBlogRepository _blogRepository;
 
-        public BlogService(IBlogRepository blogRepository)
-        {
-            _blogRepository = blogRepository;
-        }
+        public BlogService(IBlogRepository blogRepository) => _blogRepository = blogRepository;
 
         public async Task<IEnumerable<Blog>> GetAllBlogPosts()
         {
-            try
-            {
-                var blogPosts = await _blogRepository.GetAllBlogPosts();
-                return blogPosts;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _blogRepository.GetAllBlogPosts();
         }
 
         public async Task<Blog> GetBlogPostById(int id)
         {
-            try
-            {
-                var blogPost = await _blogRepository.GetBlogPostById(id);
-
-                if(blogPost is null)
-                {
-                    throw new NotFoundCoreException($"Blog post with id {id} not found.");
-                }
-
-                return blogPost;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _blogRepository.GetBlogPostById(id)
+                ?? throw new NotFoundCoreException($"Blog post with id {id} not found.");
         }
 
         public async Task CreateBlogPost(Blog blog)
         {
-            try
-            {
-                _blogRepository.CreateBlogPost(blog);
-                await _blogRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            _blogRepository.CreateBlogPost(blog);
+            await _blogRepository.SaveAsync();
         }
 
         public async Task UpdateBlogPost(int id, Blog blog)
         {
-            try
-            {
-                var existingBlogPost = await GetBlogPostById(id);
+            var existingBlogPost = await GetBlogPostById(id);
+            existingBlogPost.Title = blog.Title;
+            existingBlogPost.Content = blog.Content;
 
-                existingBlogPost.Title = blog.Title;
-                existingBlogPost.Content = blog.Content;
-
-                _blogRepository.UpdateBlogPost(existingBlogPost);
-                await _blogRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            _blogRepository.UpdateBlogPost(existingBlogPost);
+            await _blogRepository.SaveAsync();
         }
 
         public async Task DeleteBlogPost(int id)
         {
-            try
-            {
-                var existingBlogPost = await GetBlogPostById(id);
-
-                _blogRepository.DeleteBlogPost(existingBlogPost);
-                await _blogRepository.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var existingBlogPost = await GetBlogPostById(id);
+            _blogRepository.DeleteBlogPost(existingBlogPost);
+            await _blogRepository.SaveAsync();
         }
     }
 }
