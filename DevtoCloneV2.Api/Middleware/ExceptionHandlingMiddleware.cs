@@ -12,46 +12,27 @@ namespace DevtoCloneV2.Api.Middleware
 			{
 				await next(context);
 			}
-			catch (BadRequestCoreException ex)
-			{
-				var result = JsonSerializer.Serialize(new { error = ex.Message });
-
-				context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				context.Response.ContentType = "application/json";
-				await context.Response.WriteAsync(result);
-			}
-            catch (NotFoundCoreException ex)
+            catch (Exception ex)
             {
-                var result = JsonSerializer.Serialize(new { error = ex.Message });
-
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(result);
+                await HandleExceptionAsync(context, ex);
             }
-            catch (ConflictCoreException ex)
+        }
+
+        private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
+        {
+            httpContext.Response.ContentType = "application/json";
+
+            httpContext.Response.StatusCode = exception switch
             {
-                var result = JsonSerializer.Serialize(new { error = ex.Message });
+                BadRequestCoreException => (int)HttpStatusCode.BadRequest,
+                NotFoundCoreException => (int)HttpStatusCode.NotFound,
+                ConflictCoreException => (int)HttpStatusCode.Conflict,
+                UnprocessableEntityCoreException => (int)HttpStatusCode.UnprocessableEntity,
+                _ => (int)HttpStatusCode.InternalServerError
+            };
 
-                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(result);
-            }
-            catch (UnprocessableEntityCoreException ex)
-            {
-                var result = JsonSerializer.Serialize(new { error = ex.Message });
-
-                context.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(result);
-            }
-            catch (Exception)
-            {
-                var result = JsonSerializer.Serialize(new { error = "Internal server error." });
-
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(result);
-            }
+            var result = JsonSerializer.Serialize(new { error = httpContext.Response.StatusCode < 500 ? exception.Message : "Internal server error." });
+            await httpContext.Response.WriteAsync(result);
         }
     }
 }
